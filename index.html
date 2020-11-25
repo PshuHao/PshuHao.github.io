@@ -403,6 +403,71 @@
 
 	<article>
 	
+		<h1><a href="/2019/03/26/Es6的set和map/">Es6的set和map</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2019-03-26</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h1 id="Es6之set-amp-map"><a href="#Es6之set-amp-map" class="headerlink" title="Es6之set&amp;map"></a>Es6之set&amp;map</h1><p>​        Set ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。 Set函数可以接受一个数组（或类似数组的对象）作为参数，用来初始化。 // 例一var set = new Set([1, 2, 3, 4, 4]); […set] // [1, 2, 3, 4]var s = new Set(); [2, 3, 5, 4, 5, 2, 2].map(x =&gt; s.add(x)); for (let i of s) { console.log(i); } // 2 3 5 4 在Set内部，两个NaN是相等。两个对象总是不相等的。</p>
+<p>​        可以用length来检测 四个操作方法： add(value)：添加某个值，返回Set结构本身。delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。has(value)：返回一个布尔值，表示该值是否为Set的成员。clear()：清除所有成员，没有返回值 set内部的元素可以遍历for…of… weakset WeakSet结构与Set类似，也是不重复的值的集合。 WeakSet和Set的区别： WeakSet的成员只能是对象，而不能是其他类型的值WeakSet中的对象都是弱引用，即垃圾回收机制不考虑WeakSet对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于WeakSet之中。这个特点意味着，无法引用WeakSet的成员，因此WeakSet是不可遍历的。Map Map结构提供了“值—值”的对应，是一种更完善的Hash结构实现。如果你需要“键值对”的数据结构，Map比Object更合适。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。 var m = new Map(); var o = {p: “Hello World”}; m.set(o, “content”) m.get(o) // “content” m.has(o) // true m.delete(o) // true m.has(o) // false 注意，只有对同一个对象的引用，Map结构才将其视为同一个键。这一点要非常小心。 var map = new Map(); map.set([‘a’], 555); map.get([‘a’]) // undefined 上面代码的set和get方法，表面是针对同一个键，但实际上这是两个值，内存地址是不一样的，因此get方法无法读取该键，返回undefined。 如果Map的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map将其视为一个键，包括0和-0。另外，虽然NaN不严格相等于自身，但Map将其视为同一个键。 实例属性和方法：size、set、get、has、delete、clear 遍历方法：keys（）、values（）、entries（）、forEach（）</p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2019/02/26/简述HTTP请求过程/">简述HTTP请求过程</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2019-02-26</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h1 id="简述HTTP请求过程"><a href="#简述HTTP请求过程" class="headerlink" title="简述HTTP请求过程"></a>简述HTTP请求过程</h1><p>HTTP（HyperText Transfer Protocol）超文本传输协议，是一种用于分布式、协作式和超媒体信息系统的<strong>应用层协议</strong>。HTTP 是一个简单的<strong>请求-响应</strong>协议，是<strong>客户端和服务端</strong>之间请求和应答的标准，它通常运行在 TCP（传输控制协议）之上，由统一资源标识符（Uniform Resource Identifiers，URI 包含 URL 和 URN ）来标识。</p>
+<p>HTTP 通过使用浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。HTTP是万维网的数据通信的基础。</p>
+<p><figure class="figure"><img src="https://mu-mu.cn/blog/wp-content/uploads/2020/08/HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B-1.jpg" alt="img"><figcaption class="figure__caption">img</figcaption></figure></p>
+<p>以下是一个 HTTP 请求的完整过程：</p>
+<p>0、<strong>URL匹配和DNS解析</strong>：<br>之前在简述 URL 中说过，当我们在浏览器中输入一段 URL 的时候，会通过<strong>一系列规则</strong>，匹配到相应的唯一资源，比如说：<a target="_blank" rel="noopener" href="http://mu-mu.cn/example/index.html%EF%BC%8C%E5%88%99%E6%98%AF%E5%91%8A%E8%AF%89%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E9%80%9A%E8%BF%87http%E5%8D%8F%E8%AE%AE%EF%BC%8C%E5%9C%A8mu-mu.cn%E8%BF%99%E4%B8%AA%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%8C%E5%9C%A8%E9%BB%98%E8%AE%A4%E7%9A%8480%E7%AB%AF%E5%8F%A3%E4%B8%8B%EF%BC%8C%E5%9C%A8/example%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E8%AF%B7%E6%B1%82index.html%E8%BF%99%E4%B8%AA%E8%B5%84%E6%BA%90%E3%80%82">http://mu-mu.cn/example/index.html，则是告诉浏览器，我们需要通过http协议，在mu-mu.cn这个服务端，在默认的80端口下，在/example目录下，请求index.html这个资源。</a></p>
+<p>不过其实大家都不认mu-mu.cn这个域名，认的都是mu-mu.cn对应的IP地址，就像我知道你叫张三，但是能表明你身份的不是张三这个名字，而是你的身份证号码一样，域名的出现只是为了方便人们记忆和使用，但要让计算机识别，还需要通过DNS将域名解析到相应的IP地址。</p>
+<p>1、<strong>建立TCP连接：三次握手</strong><br>HTTP是应用层协议，他的工作还需要数据层协议的支持，最常与它搭配的就是TCP协议（应用层、数据层是OSI七层模型中的，以后有机会会说到的）。TCP协议称为数据传输协议，是可靠传输，面向连接的，并且面向字节流的。<br><strong>面向连接</strong>：通信之前先建立连接，确保双方在线。<br><strong>可靠传输</strong>：在网络正常的情况下，数据不会丢失。<br><strong>面向字节流</strong>：传输灵活，但是TCP的传输存在粘包问题，没有明显的数据约定。<br>在正式发送请求之前，需要先建立TCP连接。建立TCP连接的过程简单地来说就是客户端和服务端之间发送三次消息来确保连接的建立，这个过程称为<strong>三次握手</strong>。</p>
+<p>2、<strong>发送请求</strong><br>TCP连接建立完毕之后，客户端就可以向服务端发送请求报文来请求资源了。请求报文分为请求行、请求头、空行和请求体，服务端通过请求行和请求头中的内容获取客户端的信息，通过请求体中的内容获取客户端传过来的数据。</p>
+<p>3、<strong>响应应答</strong><br>在接收到客户端发来的请求报文并且确认完毕之后，服务端会向客户端发送响应报文。响应报文由状态行、响应头、空行和响应体组成，服务端通过状态行和响应头告诉客户端请求的状态和如何对数据处理等信息，真正的数据则在响应体中传输给客户端。</p>
+<p>关于请求报文和响应报文，我之前也简单地说到过。<a target="_blank" rel="noopener" href="https://mu-mu.cn/blog/index.php/2020/07/29/1645/">https://mu-mu.cn/blog/index.php/2020/07/29/1645/</a></p>
+<p>4、<strong>断开TCP连接</strong><br>当请求完成后，还需断开TCP连接。断开的过程简单地说就算客户端和服务端之间发送四次信息来确保连接的断开，所以称为四次挥手。</p>
+<p>以上就是一个HTTP请求的简单过程了，接来下再说一说HTTP请求的特性。</p>
+<p>一、<strong>单向请求</strong><br>HTTP请求是单向的，是只能由客户端发起请求，由服务端响应的<strong>请求-响应模式</strong>。（如果你需要双向请求，可以用socket）</p>
+<p>二、<strong>基于TCP协议</strong><br>HTTP是应用层协议，所以其数据传输部分是基于TCP协议实现的。</p>
+<p>三、<strong>无状态</strong><br>HTTP请求是无状态的，即没有记忆功能，不能获取之前请求或响应的内容。起初这种简单的模式，能够加快处理速度，保证协议的稳定，但是随着应用的发展，这种无状态的模式会使我们的业务实现变得麻烦，比如说需要保存用户的登录状态，就得专门使用数据库来实现。于是乎，为了实现状态的保持，引入了Cookie技术来管理状态。</p>
+<p>四、<strong>无连接</strong><br>HTTP协议不能保存连接状态，每次连接只处理一个请求，用完即断，从而达到节约传输时间、提高并发性。在TCP连接断开之后，客户端和服务端就像陌生人一样，下次再发送请求，就得重新建立连接了。有时候，当我们需要发送一段频繁的请求时，这种无连接的状态反而会耗费更多的请求时间（因为建立和断开连接本身也需要时间），于是乎，HTTP1.1中提出了持久连接的概念，可以在请求头中设置Connection: keep-alive来实现。</p>
+<p>至此，HTTP协议完整的请求过程和特性就简单地介绍完了，继续学习吧！</p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2019/01/22/关于Vue路由过渡/">关于Vue路由过渡</a></h1>
 	
 	<div class="article__infos">
@@ -456,6 +521,35 @@
 
 	<article>
 	
+		<h1><a href="/2018/12/26/axios和ajax的区别/">axios和ajax的区别</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-12-26</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h3 id="axios和ajax的区别"><a href="#axios和ajax的区别" class="headerlink" title="axios和ajax的区别"></a>axios和ajax的区别</h3><h3 id="1-Axios"><a href="#1-Axios" class="headerlink" title="1. Axios"></a>1. Axios</h3><p>Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。<br>特点：<br>1.从浏览器中创建 XMLHttpRequests<br>2.从 node.js 创建 http 请求<br>3.支持 Promise API<br>4.拦截请求和响应<br>5.转换请求数据和响应数据<br>6.取消请求<br>7.自动转换 JSON 数据<br>8.客户端支持防御 XSRF</p>
+<h3 id="2-AJAX"><a href="#2-AJAX" class="headerlink" title="2 . AJAX"></a>2 . AJAX</h3><p>AJAX 是与服务器交换数据并更新部分网页的，在不重新加载整个页面的情况下。<br>Ajax = 异步 JavaScript 和 XML（标准通用标记语言的子集）。</p>
+<h3 id="3-区别"><a href="#3-区别" class="headerlink" title="3.区别"></a>3.区别</h3><p>axios 和 ajax 的使用方法基本一样，只有<strong>个别参数不同</strong>；</p>
+<p><strong>Axios</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">axios(&#123;</span><br><span class="line">      url: <span class="string">&#x27;http://jsonplaceholder.typicode.com/users&#x27;</span>,</span><br><span class="line">      method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">      responseType: <span class="string">&#x27;json&#x27;</span>, <span class="comment">// 默认的</span></span><br><span class="line">      data: &#123;</span><br><span class="line">        <span class="comment">//&#x27;a&#x27;: 1,</span></span><br><span class="line">        <span class="comment">//&#x27;b&#x27;: 2,</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).then(function (response) &#123;</span><br><span class="line">      console.log(response);</span><br><span class="line">      console.log(response.data);</span><br><span class="line">    &#125;).<span class="keyword">catch</span>(function (error) &#123;</span><br><span class="line">      console.log(error);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">      url: <span class="string">&#x27;http://jsonplaceholder.typicode.com/users&#x27;</span>,</span><br><span class="line">      type: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">      dataType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">        <span class="comment">//&#x27;a&#x27;: 1,</span></span><br><span class="line">        <span class="comment">//&#x27;b&#x27;: 2,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      success: function (response) &#123;</span><br><span class="line">        console.log(response)；</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2018/10/03/深度作用选择器/">深度作用选择器</a></h1>
 	
 	<div class="article__infos">
@@ -491,102 +585,9 @@
 
 
 
-	<article>
-	
-		<h1><a href="/2018/07/12/知识整理（7-12）/">知识整理（7-12）</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2018-07-12</span><br />
-		
-		
-	</div>
 
-	
+	<span class="different-posts">📖 <a href="/page/2">more posts</a> 📖</span>
 
-	
-		<h4 id="1-v-for-key的作用"><a href="#1-v-for-key的作用" class="headerlink" title="1.v-for key的作用"></a>1.v-for key的作用</h4><p>当页面的数据发生变化时，Diff算法只会比较同一层级的节点：</p>
-<p><strong>如果节点类型不同，直接干掉前面的节点，再创建并插入新的节点，不会再比较这个节点以后的子节点了。</strong></p>
-<p><strong>如果节点类型相同，则会重新设置该节点的属性，从而实现节点的更新。</strong></p>
-<p><strong>key的作用主要是为了高效的更新虚拟DOM。</strong>另外vue中在使用<strong>相同标签名元素的过渡切换</strong>时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果。</p>
-<h4 id="2-keep-alive"><a href="#2-keep-alive" class="headerlink" title="2.keep-alive"></a>2.keep-alive</h4><p>Props:</p>
-<ul>
-<li><code>include</code> - 字符串或正则表达式。只有名称匹配的组件会被缓存。</li>
-<li><code>exclude</code> - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。</li>
-<li><code>max</code> - 数字。最多可以缓存多少组件实例。</li>
-</ul>
-<p>用法：<code>&lt;keep-alive&gt;</code> 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。和 <code>&lt;transition&gt;</code> 相似，<code>&lt;keep-alive&gt;</code> 是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在组件的父组件链中。</p>
-<p>当组件在 <code>&lt;keep-alive&gt;</code> 内被切换，它的 <code>activated</code> 和 <code>deactivated</code> 这两个生命周期钩子函数将会被对应执行。</p>
-<p><strong>遍历整个组件树，只要有就缓存</strong></p>
-<h4 id="3-怎么做首屏优化渲染"><a href="#3-怎么做首屏优化渲染" class="headerlink" title="3.怎么做首屏优化渲染"></a>3.怎么做首屏优化渲染</h4><p>一般都是用服务端渲染，中间做一个node中间层，在请求页面时服务器直接把这个页面html在后端拼好，客户端只需要渲染。可以说是老大做的，自己看了一下但是没自己做过。</p>
-<h4 id="4-xss和csrf"><a href="#4-xss和csrf" class="headerlink" title="4.xss和csrf"></a>4.xss和csrf</h4><p>XSS：跨站脚本攻击（Cross Site Script，XSS攻击），通常指黑客通过“HTML注入”篡改了网页，插入了恶意的脚本，从而在用户浏览网页时，控制用户浏览器的一种攻击。</p>
-<p>XSS的本质是一种“HTML注入”，用户的数据被当成了HTML代码一部分来执行，从而产生了新的语义。</p>
-<p>CSRF:CSRF（Cross-site request forgery跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。</p>
-
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2018/05/29/知识点整理（5-30）/">知识点整理（5.29）</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2018-05-29</span><br />
-		
-		
-	</div>
-
-	
-
-	
-		<h4 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h4><p>块级格式化上下文，一个HTML元素要创建BFC，则满足下列的任意一个或多个条件即可：<br>1、float的值不是none。<br>2、position的值不是static或者relative。<br>3、display的值是inline-block、table-cell、flex、table-caption或者inline-flex<br>4、overflow的值不是visible<br>BFC是一个独立的布局环境，其中的元素布局是不受外界的影响，并且在一个BFC中，块盒与行盒（行盒由一行中所有的内联元素所组成）都会垂直的沿着其父元素的边框排列<br>举例：两个相邻块级盒子垂直外边距合并问题</p>
-<h4 id="REM"><a href="#REM" class="headerlink" title="REM"></a>REM</h4><p>rem是CSS3新增的一个相对单位（root em，根em），是一个相对单位，相对于当前html的font-size的大小来决定的，也就是1个REM = 当前html font-size大小；一般用来做移动端适配问题</p>
-<h4 id="Stylus"><a href="#Stylus" class="headerlink" title="Stylus"></a>Stylus</h4><p>CSS 的预处理框架，在stylus里面可以写一些负责的逻辑，向判断，循环等，使用起来比较的简单方便，但是目前使用人群较少，基数基本上在Less&amp;Sass上面</p>
-
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2018/04/20/知识点整理（4-20）/">知识点整理（4.20）</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2018-04-20</span><br />
-		
-		
-	</div>
-
-	
-
-	
-		<h4 id="PostCSS"><a href="#PostCSS" class="headerlink" title="PostCSS"></a>PostCSS</h4><p>postcss 一种对css编译的工具，类似babel对js的处理，常见功能：<br>1、使用下一代css语法<br>2、自动补全浏览器前缀<br>3、自动把px代为转换成rem<br>4、css 代码压缩等等<br>postcss 只是一个工具，本身不会对css一顿操作，它通过插件实现功能，autoprefixer 就是其一，我们可以在webpack里面进行相应配置；大致实现原理：<br>1、Tokenizer 将源css字符串进行分词<br>2、Parser 经过Tokenizer之后，需要Parser将结果初始化为AST 语法树<br>3、Processor 经过AST之后，PostCSS提供了大量JS API给插件用<br>4、Stringifier 插件处理后，比如加浏览器前缀，会被重新Stringifier.stringify为一般CSS</p>
-<h4 id="async-awat"><a href="#async-awat" class="headerlink" title="async/awat"></a>async/awat</h4><p>1、async/await 是ES7出现的， 两者成对出现，有async地方不一定有await，但是有await地方，这个函数必须是async<br>2、async修饰过的函数，返回的是一个Promise对象，如果在函数中return一个数据，那么async会把这个通过 Promise.resolve() 封装成一个Promise对象<br>3、 await 放置在Promise调用之前，await 强制后面点代码等待，直到Promise对象resolve，得到resolve的值作为await表达式的运算结果<br>4、简单说明实现原理：async、await 是 co 库的官方实现。也可以看作自带启动器的 generator 函数的语法糖。不同的是，async、await 只支持 Promise 和原始类型的值</p>
-<h4 id="JS执行机制，EventLopper，宏任务-amp-微任务"><a href="#JS执行机制，EventLopper，宏任务-amp-微任务" class="headerlink" title="JS执行机制，EventLopper，宏任务&amp;微任务"></a>JS执行机制，EventLopper，宏任务&amp;微任务</h4><p>1、 JS引擎线程用来执行栈中的同步任务，当所有同步任务执行完毕后，栈被清空，然后读取消息队列中的一个待处理任务，并把相关回调函数压入栈中，单线程开始执行新的同步任务<br>2、 在异步任务里面分为了宏任务和微任务，那么会跟进不同的分类放入不同的异步队列中，那么在最后只调用的时候必然会有顺序，那么调用的顺序是 先执行 微任务，再执行宏任务<br>3、 宏任务分为： ①setInterval；②setTimeout；<br>4、 微任务分为： ①Promise；②process.nextTick()</p>
-<h4 id="ES6继承-super关键字作用"><a href="#ES6继承-super关键字作用" class="headerlink" title="ES6继承 super关键字作用"></a>ES6继承 super关键字作用</h4><p>ES6利用 extends 进行继承，在constructor里面需要协商super()，作用是为了修改父类中的this指向，指向子类的实例对象，就相当于调用了 Father.prototype.constructor.call(this,…)</p>
-
-	
-
-	
-
-</article>
-
-
-
-
-
-
-	<span class="different-posts">📕 end of posts 📕</span>
 
 
 	</main>
