@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>知识点整理（4.20） | Hexo</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+      <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/atom.xml" class="header__link">RSS</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">Hexo</a></h1>
+		<h2 class="header__subtitle">shuHalo-blog</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>知识点整理（4.20）</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-04-20</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h4 id="PostCSS"><a href="#PostCSS" class="headerlink" title="PostCSS"></a>PostCSS</h4><p>postcss 一种对css编译的工具，类似babel对js的处理，常见功能：<br>1、使用下一代css语法<br>2、自动补全浏览器前缀<br>3、自动把px代为转换成rem<br>4、css 代码压缩等等<br>postcss 只是一个工具，本身不会对css一顿操作，它通过插件实现功能，autoprefixer 就是其一，我们可以在webpack里面进行相应配置；大致实现原理：<br>1、Tokenizer 将源css字符串进行分词<br>2、Parser 经过Tokenizer之后，需要Parser将结果初始化为AST 语法树<br>3、Processor 经过AST之后，PostCSS提供了大量JS API给插件用<br>4、Stringifier 插件处理后，比如加浏览器前缀，会被重新Stringifier.stringify为一般CSS</p>
+<h4 id="async-awat"><a href="#async-awat" class="headerlink" title="async/awat"></a>async/awat</h4><p>1、async/await 是ES7出现的， 两者成对出现，有async地方不一定有await，但是有await地方，这个函数必须是async<br>2、async修饰过的函数，返回的是一个Promise对象，如果在函数中return一个数据，那么async会把这个通过 Promise.resolve() 封装成一个Promise对象<br>3、 await 放置在Promise调用之前，await 强制后面点代码等待，直到Promise对象resolve，得到resolve的值作为await表达式的运算结果<br>4、简单说明实现原理：async、await 是 co 库的官方实现。也可以看作自带启动器的 generator 函数的语法糖。不同的是，async、await 只支持 Promise 和原始类型的值</p>
+<h4 id="JS执行机制，EventLopper，宏任务-amp-微任务"><a href="#JS执行机制，EventLopper，宏任务-amp-微任务" class="headerlink" title="JS执行机制，EventLopper，宏任务&amp;微任务"></a>JS执行机制，EventLopper，宏任务&amp;微任务</h4><p>1、 JS引擎线程用来执行栈中的同步任务，当所有同步任务执行完毕后，栈被清空，然后读取消息队列中的一个待处理任务，并把相关回调函数压入栈中，单线程开始执行新的同步任务<br>2、 在异步任务里面分为了宏任务和微任务，那么会跟进不同的分类放入不同的异步队列中，那么在最后只调用的时候必然会有顺序，那么调用的顺序是 先执行 微任务，再执行宏任务<br>3、 宏任务分为： ①setInterval；②setTimeout；<br>4、 微任务分为： ①Promise；②process.nextTick()</p>
+<h4 id="ES6继承-super关键字作用"><a href="#ES6继承-super关键字作用" class="headerlink" title="ES6继承 super关键字作用"></a>ES6继承 super关键字作用</h4><p>ES6利用 extends 进行继承，在constructor里面需要协商super()，作用是为了修改父类中的this指向，指向子类的实例对象，就相当于调用了 Father.prototype.constructor.call(this,…)</p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2018/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86%EF%BC%884-20%EF%BC%89/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		  <li class="footer-links__link"><a href="/atom.xml">RSS</a></li>
+	    
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2020 PshuHao | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

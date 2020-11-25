@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>关于Vue路由过渡 | Hexo</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+      <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/atom.xml" class="header__link">RSS</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">Hexo</a></h1>
+		<h2 class="header__subtitle">shuHalo-blog</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>关于Vue路由过渡</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2019-01-22</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h1 id="Vue-路由过渡"><a href="#Vue-路由过渡" class="headerlink" title="Vue 路由过渡"></a>Vue 路由过渡</h1><p><code>&lt;router-view&gt;</code> 是基本的动态组件，所以我们可以用 <code>&lt;transition&gt;</code> 组件给它添加一些过渡效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;transition name&#x3D;&quot;slide-left&quot; mode&#x3D;&quot;out-in&quot;&gt;</span><br><span class="line">        &lt;router-view &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;transition&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="过渡的类名"><a href="#过渡的类名" class="headerlink" title="过渡的类名"></a>过渡的类名</h3><p>在进入/离开的过渡中，会有 6 个 class 切换。</p>
+<ol>
+<li><code>v-enter</code>：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。</li>
+<li><code>v-enter-active</code>：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。</li>
+<li><code>v-enter-to</code>: 2.1.8版及以上 定义进入过渡的结束状态。在元素被插入之后下一帧生效 (与此同时 <code>v-enter</code> 被移除)，在过渡/动画完成之后移除。</li>
+<li><code>v-leave</code>: 定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。</li>
+<li><code>v-leave-active</code>：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡/动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。</li>
+<li><code>v-leave-to</code>: 2.1.8版及以上 定义离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 <code>v-leave</code> 被删除)，在过渡/动画完成之后移除。<figure class="figure"><img src="https://cn.vuejs.org/images/transition.png" alt="Transition Diagram"><figcaption class="figure__caption">Transition Diagram</figcaption></figure></li>
+</ol>
+<p>对于这些在过渡中切换的类名来说，如果使用一个没有名字的 <code>&lt;transition&gt;</code>，则 <code>v-</code> 是这些类名的默认前缀。如果你使用了 <code>&lt;transition name=&quot;my-transition&quot;&gt;</code>，那么 <code>v-enter</code> 会替换为 <code>my-transition-enter</code>。</p>
+<p><strong>Props：</strong></p>
+<ul>
+<li><code>name</code> - string，用于自动生成 CSS 过渡类名。例如：<code>name: &#39;fade&#39;</code> 将自动拓展为<code>.fade-enter</code>，<code>.fade-enter-active</code>等。默认类名为 <code>&quot;v&quot;</code></li>
+<li><code>appear</code> - boolean，是否在初始渲染时使用过渡。默认为 <code>false</code>。</li>
+<li><code>css</code> - boolean，是否使用 CSS 过渡类。默认为 <code>true</code>。如果设置为 <code>false</code>，将只通过组件事件触发注册的 JavaScript 钩子。</li>
+<li><code>type</code> - string，指定过渡事件类型，侦听过渡何时结束。有效值为 <code>&quot;transition&quot;</code> 和 <code>&quot;animation&quot;</code>。默认 Vue.js 将自动检测出持续时间长的为过渡事件类型。</li>
+<li><code>mode</code> - string，控制离开/进入过渡的时间序列。有效的模式有 <code>&quot;out-in&quot;</code> 和 <code>&quot;in-out&quot;</code>；默认同时进行。</li>
+<li><code>duration</code> - number | { <code>enter</code>: number, <code>leave</code>: number } 指定过渡的持续时间。默认情况下，Vue 会等待过渡所在根元素的第一个 <code>transitionend</code> 或 <code>animationend</code> 事件。</li>
+</ul>
+<p><strong>过渡模式mode：</strong></p>
+<p>​      1.in-out:新元素先进入过渡，完成之后当前元素过渡离开。</p>
+<p>​      2.out-in:当前元素先进行过渡离开，离开完成后新元素过渡进入。</p>
+<h5 id="example："><a href="#example：" class="headerlink" title="example："></a>example：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.slide-left-enter &#123;</span><br><span class="line">   opacity: 0;</span><br><span class="line">   -webkit-transform: translate(30px, 0);</span><br><span class="line">   transform: translate(30px, 0);</span><br><span class="line"> &#125;</span><br><span class="line"> .slide-left-enter-active&#123;</span><br><span class="line">   transition: all .5s ease;</span><br><span class="line"> &#125;</span><br><span class="line"> .slide-left-leave-to&#123;</span><br><span class="line">   opacity: 0;</span><br><span class="line">   -webkit-transform: translate(-30px, 0);</span><br><span class="line">   transform: translate(-30px, 0);</span><br><span class="line"> &#125;</span><br><span class="line"> .slide-left-leave-active &#123;</span><br><span class="line">   transition: all .5s ease;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+	
+
+	
+		<span class="different-posts"><a href="/2019/01/22/%E5%85%B3%E4%BA%8EVue%E8%B7%AF%E7%94%B1%E8%BF%87%E6%B8%A1/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		  <li class="footer-links__link"><a href="/atom.xml">RSS</a></li>
+	    
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2020 PshuHao | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

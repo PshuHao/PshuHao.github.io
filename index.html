@@ -244,7 +244,37 @@
 	
 
 	
-		<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:#app,</span><br><span class="line">    data:&#123;&#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line"><span class="comment">//没有简写的函数channelRecomList</span></span><br><span class="line">  channelRecomList () &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">this</span>.allChannelList.filter(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">this</span>.channel.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> v.id === item.id</span><br><span class="line">        &#125;) === -<span class="number">1</span></span><br><span class="line">       &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//简写的函数channelRecomList，使用箭头函数方法简化</span></span><br><span class="line">#注意：因箭头函数没有this指向，此时可以在channelRecomList函数中自定义形参，函数体内使用此形参代替this指向来使用，如onThis，可以无定义，它本身代表全局的this指向，解决箭头函数无this指向的问题</span><br><span class="line">  channelRecomList: <span class="function">(<span class="params">onThis</span>) =&gt;</span> onThis.allChannelList.filter(<span class="function"><span class="params">item</span> =&gt;</span> onThis.channel.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> v.id === item.id) === -<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+		<p>最近在处理Vue的computed计算属性函数问题的时候，发现一个有意思的现象，首先前提是因为我想将代码全部改为箭头函数进行简化，压缩成一行代码，然后也因为箭头函数的this的指向问题导致此时无法直接获取Vue这个实例，从而无法直接获得实例的data中的属性数据，在尝试解决办法过程中，将computed的函数形参随意填了一个名称，然后在函数作用域内该形参可以代替vue这个实例对象，从中可以拿到data中的所有属性<br>数据，目前还没有发现这个现象的具体原理，以及是否能够合理地使用，但是从效果上来，也能够基本实现代替this来指向实例对象获取属性数据，后续会继续发掘一下其中的原因。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:#app,</span><br><span class="line">    data:&#123;</span><br><span class="line">      allChannelList：[],</span><br><span class="line">      channel:[]</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line"><span class="comment">//没有简写的函数channelRecomList</span></span><br><span class="line">  channelRecomList () &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">this</span>.allChannelList.filter(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">this</span>.channel.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> v.id === item.id</span><br><span class="line">        &#125;) === -<span class="number">1</span></span><br><span class="line">       &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//简写的函数channelRecomList，使用箭头函数方法简化</span></span><br><span class="line">#注意：因箭头函数没有this指向，此时可以在channelRecomList函数中</span><br><span class="line">自定义形参，函数体内使用此形参代替<span class="built_in">this</span>指向来使用，如onThis，可</span><br><span class="line">以无定义，它本身代表全局的<span class="built_in">this</span>指向，解决箭头函数无<span class="built_in">this</span>指向的问题</span><br><span class="line">  channelRecomList: <span class="function">(<span class="params">onThis</span>) =&gt;</span> onThis.allChannelList.filter(<span class="function"><span class="params">item</span> =&gt;</span> onThis.channel.findIndex(<span class="function"><span class="params">v</span> =&gt;</span> v.id === item.id) === -<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2019/12/02/节流和防抖/">节流和防抖</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2019-12-02</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行。</p>
+<p>场景: 搜索输入框</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>节流：指定时间间隔内只会执行一次任务。</p>
+<p>场景：1. 监听滚动条 2. 监听点击按钮</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!canRun) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    canRun = <span class="literal">false</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">      canRun = <span class="literal">true</span>;</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 	
 
 	
@@ -278,6 +308,149 @@
 <p>触发父组件的click事件</p>
 <p><figure class="figure"><img src="https://upload-images.jianshu.io/upload_images/17849217-5a2d55072dc0bb3a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1031/format/webp" alt="img"><figcaption class="figure__caption">img</figcaption></figure></p>
 <p>调用成功</p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2019/01/22/关于Vue路由过渡/">关于Vue路由过渡</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2019-01-22</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h1 id="Vue-路由过渡"><a href="#Vue-路由过渡" class="headerlink" title="Vue 路由过渡"></a>Vue 路由过渡</h1><p><code>&lt;router-view&gt;</code> 是基本的动态组件，所以我们可以用 <code>&lt;transition&gt;</code> 组件给它添加一些过渡效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;transition name&#x3D;&quot;slide-left&quot; mode&#x3D;&quot;out-in&quot;&gt;</span><br><span class="line">        &lt;router-view &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;transition&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="过渡的类名"><a href="#过渡的类名" class="headerlink" title="过渡的类名"></a>过渡的类名</h3><p>在进入/离开的过渡中，会有 6 个 class 切换。</p>
+<ol>
+<li><code>v-enter</code>：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。</li>
+<li><code>v-enter-active</code>：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。</li>
+<li><code>v-enter-to</code>: 2.1.8版及以上 定义进入过渡的结束状态。在元素被插入之后下一帧生效 (与此同时 <code>v-enter</code> 被移除)，在过渡/动画完成之后移除。</li>
+<li><code>v-leave</code>: 定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。</li>
+<li><code>v-leave-active</code>：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡/动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。</li>
+<li><code>v-leave-to</code>: 2.1.8版及以上 定义离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 <code>v-leave</code> 被删除)，在过渡/动画完成之后移除。<figure class="figure"><img src="https://cn.vuejs.org/images/transition.png" alt="Transition Diagram"><figcaption class="figure__caption">Transition Diagram</figcaption></figure></li>
+</ol>
+<p>对于这些在过渡中切换的类名来说，如果使用一个没有名字的 <code>&lt;transition&gt;</code>，则 <code>v-</code> 是这些类名的默认前缀。如果你使用了 <code>&lt;transition name=&quot;my-transition&quot;&gt;</code>，那么 <code>v-enter</code> 会替换为 <code>my-transition-enter</code>。</p>
+<p><strong>Props：</strong></p>
+<ul>
+<li><code>name</code> - string，用于自动生成 CSS 过渡类名。例如：<code>name: &#39;fade&#39;</code> 将自动拓展为<code>.fade-enter</code>，<code>.fade-enter-active</code>等。默认类名为 <code>&quot;v&quot;</code></li>
+<li><code>appear</code> - boolean，是否在初始渲染时使用过渡。默认为 <code>false</code>。</li>
+<li><code>css</code> - boolean，是否使用 CSS 过渡类。默认为 <code>true</code>。如果设置为 <code>false</code>，将只通过组件事件触发注册的 JavaScript 钩子。</li>
+<li><code>type</code> - string，指定过渡事件类型，侦听过渡何时结束。有效值为 <code>&quot;transition&quot;</code> 和 <code>&quot;animation&quot;</code>。默认 Vue.js 将自动检测出持续时间长的为过渡事件类型。</li>
+<li><code>mode</code> - string，控制离开/进入过渡的时间序列。有效的模式有 <code>&quot;out-in&quot;</code> 和 <code>&quot;in-out&quot;</code>；默认同时进行。</li>
+<li><code>duration</code> - number | { <code>enter</code>: number, <code>leave</code>: number } 指定过渡的持续时间。默认情况下，Vue 会等待过渡所在根元素的第一个 <code>transitionend</code> 或 <code>animationend</code> 事件。</li>
+</ul>
+<p><strong>过渡模式mode：</strong></p>
+<p>​      1.in-out:新元素先进入过渡，完成之后当前元素过渡离开。</p>
+<p>​      2.out-in:当前元素先进行过渡离开，离开完成后新元素过渡进入。</p>
+<h5 id="example："><a href="#example：" class="headerlink" title="example："></a>example：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.slide-left-enter &#123;</span><br><span class="line">   opacity: 0;</span><br><span class="line">   -webkit-transform: translate(30px, 0);</span><br><span class="line">   transform: translate(30px, 0);</span><br><span class="line"> &#125;</span><br><span class="line"> .slide-left-enter-active&#123;</span><br><span class="line">   transition: all .5s ease;</span><br><span class="line"> &#125;</span><br><span class="line"> .slide-left-leave-to&#123;</span><br><span class="line">   opacity: 0;</span><br><span class="line">   -webkit-transform: translate(-30px, 0);</span><br><span class="line">   transform: translate(-30px, 0);</span><br><span class="line"> &#125;</span><br><span class="line"> .slide-left-leave-active &#123;</span><br><span class="line">   transition: all .5s ease;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2018/10/03/深度作用选择器/">深度作用选择器</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-10-03</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h1 id="vue-scoped-深度作用选择器"><a href="#vue-scoped-深度作用选择器" class="headerlink" title="vue scoped 深度作用选择器"></a>vue scoped 深度作用选择器</h1><p>如果希望 <code>scoped</code> 样式中的一个选择器能够作用得“更深”，例如影响子组件，可以使用 <code>&gt;&gt;&gt;</code> 操作符：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">.a &gt;&gt;&gt; .b &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>上述代码将会编译成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.a[data-v-f3f3eg9] .b &#123; &#x2F;* ... *&#x2F; &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>有些像 Sass 之类的预处理器无法正确解析 <code>&gt;&gt;&gt;</code>。这种情况下可以使用 <code>/deep/</code> 操作符取而代之——这是一个 <code>/deep/</code> 或 <code>::v-deep</code> 操作符，同样可以正常工作。</p>
+<p><strong>less使用/deep/</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=<span class="string">&quot;less&quot;</span> scoped&gt;</span><br><span class="line"></span><br><span class="line">.searchforminline-out &#123;</span><br><span class="line">/deep/ input&#123;</span><br><span class="line">width: <span class="number">50</span>px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2018/05/29/知识点整理（5-30）/">知识点整理（5.29）</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-05-29</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h4 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h4><p>块级格式化上下文，一个HTML元素要创建BFC，则满足下列的任意一个或多个条件即可：<br>1、float的值不是none。<br>2、position的值不是static或者relative。<br>3、display的值是inline-block、table-cell、flex、table-caption或者inline-flex<br>4、overflow的值不是visible<br>BFC是一个独立的布局环境，其中的元素布局是不受外界的影响，并且在一个BFC中，块盒与行盒（行盒由一行中所有的内联元素所组成）都会垂直的沿着其父元素的边框排列<br>举例：两个相邻块级盒子垂直外边距合并问题</p>
+<h4 id="REM"><a href="#REM" class="headerlink" title="REM"></a>REM</h4><p>rem是CSS3新增的一个相对单位（root em，根em），是一个相对单位，相对于当前html的font-size的大小来决定的，也就是1个REM = 当前html font-size大小；一般用来做移动端适配问题</p>
+<h4 id="Stylus"><a href="#Stylus" class="headerlink" title="Stylus"></a>Stylus</h4><p>CSS 的预处理框架，在stylus里面可以写一些负责的逻辑，向判断，循环等，使用起来比较的简单方便，但是目前使用人群较少，基数基本上在Less&amp;Sass上面</p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
+		<h1><a href="/2018/04/20/知识点整理（4-20）/">知识点整理（4.20）</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-04-20</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h4 id="PostCSS"><a href="#PostCSS" class="headerlink" title="PostCSS"></a>PostCSS</h4><p>postcss 一种对css编译的工具，类似babel对js的处理，常见功能：<br>1、使用下一代css语法<br>2、自动补全浏览器前缀<br>3、自动把px代为转换成rem<br>4、css 代码压缩等等<br>postcss 只是一个工具，本身不会对css一顿操作，它通过插件实现功能，autoprefixer 就是其一，我们可以在webpack里面进行相应配置；大致实现原理：<br>1、Tokenizer 将源css字符串进行分词<br>2、Parser 经过Tokenizer之后，需要Parser将结果初始化为AST 语法树<br>3、Processor 经过AST之后，PostCSS提供了大量JS API给插件用<br>4、Stringifier 插件处理后，比如加浏览器前缀，会被重新Stringifier.stringify为一般CSS</p>
+<h4 id="async-awat"><a href="#async-awat" class="headerlink" title="async/awat"></a>async/awat</h4><p>1、async/await 是ES7出现的， 两者成对出现，有async地方不一定有await，但是有await地方，这个函数必须是async<br>2、async修饰过的函数，返回的是一个Promise对象，如果在函数中return一个数据，那么async会把这个通过 Promise.resolve() 封装成一个Promise对象<br>3、 await 放置在Promise调用之前，await 强制后面点代码等待，直到Promise对象resolve，得到resolve的值作为await表达式的运算结果<br>4、简单说明实现原理：async、await 是 co 库的官方实现。也可以看作自带启动器的 generator 函数的语法糖。不同的是，async、await 只支持 Promise 和原始类型的值</p>
+<h4 id="JS执行机制，EventLopper，宏任务-amp-微任务"><a href="#JS执行机制，EventLopper，宏任务-amp-微任务" class="headerlink" title="JS执行机制，EventLopper，宏任务&amp;微任务"></a>JS执行机制，EventLopper，宏任务&amp;微任务</h4><p>1、 JS引擎线程用来执行栈中的同步任务，当所有同步任务执行完毕后，栈被清空，然后读取消息队列中的一个待处理任务，并把相关回调函数压入栈中，单线程开始执行新的同步任务<br>2、 在异步任务里面分为了宏任务和微任务，那么会跟进不同的分类放入不同的异步队列中，那么在最后只调用的时候必然会有顺序，那么调用的顺序是 先执行 微任务，再执行宏任务<br>3、 宏任务分为： ①setInterval；②setTimeout；<br>4、 微任务分为： ①Promise；②process.nextTick()</p>
+<h4 id="ES6继承-super关键字作用"><a href="#ES6继承-super关键字作用" class="headerlink" title="ES6继承 super关键字作用"></a>ES6继承 super关键字作用</h4><p>ES6利用 extends 进行继承，在constructor里面需要协商super()，作用是为了修改父类中的this指向，指向子类的实例对象，就相当于调用了 Father.prototype.constructor.call(this,…)</p>
 
 	
 

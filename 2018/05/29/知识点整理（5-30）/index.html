@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="theme-color" content="#33474d">
-	<title>Hexo</title>
+	<title>知识点整理（5.29） | Hexo</title>
 	<link rel="stylesheet" href="/css/style.css" />
 	
       <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -29,64 +29,31 @@
 	</header>
 
 	<main>
-		<h1>Archive</h1>
-
-
-
-
-
-<ul class="archive">
+		<article>
 	
+		<h1>知识点整理（5.29）</h1>
 	
-		<li class="archive__year archive__expendable ">
-			<span>2019</span>
-			<ul>
-				
-					<li class="archive__month archive__expendable">
-						<span>December</span>
-						<ul>
-							
-								<li class="archive__entry"><a href="/2019/12/02/%E8%8A%82%E6%B5%81%E5%92%8C%E9%98%B2%E6%8A%96/">节流和防抖</a></li>
-							
-						</ul>
-					</li>
-
-				
-					<li class="archive__month archive__expendable">
-						<span>August</span>
-						<ul>
-							
-								<li class="archive__entry"><a href="/2019/08/07/Vue%E4%B8%AD%E7%88%B6%E7%BB%84%E4%BB%B6%E8%B0%83%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/">Vue中父组件调子组件事件的两种方法</a></li>
-							
-						</ul>
-					</li>
-
-				
-					<li class="archive__month archive__expendable">
-						<span>January</span>
-						<ul>
-							
-								<li class="archive__entry"><a href="/2019/01/22/%E5%85%B3%E4%BA%8EVue%E8%B7%AF%E7%94%B1%E8%BF%87%E6%B8%A1/">关于Vue路由过渡</a></li>
-							
-						</ul>
-					</li>
-
-				
-			</ul>
-		</li>
+	<div class="article__infos">
+		<span class="article__date">2018-05-29</span><br />
 		
-	
-</ul>
+		
+	</div>
 
-<script>
-	const expandables = document.querySelectorAll('.archive__expendable')
-	for(let i = 0; i < expandables.length; i++) {
-		expandables[i].addEventListener('click', (e) => {
-			e.stopPropagation()
-			expandables[i].classList.toggle('archive__expendable_collapsed')
-		})
-	}
-</script>
+	
+
+	
+		<h4 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h4><p>块级格式化上下文，一个HTML元素要创建BFC，则满足下列的任意一个或多个条件即可：<br>1、float的值不是none。<br>2、position的值不是static或者relative。<br>3、display的值是inline-block、table-cell、flex、table-caption或者inline-flex<br>4、overflow的值不是visible<br>BFC是一个独立的布局环境，其中的元素布局是不受外界的影响，并且在一个BFC中，块盒与行盒（行盒由一行中所有的内联元素所组成）都会垂直的沿着其父元素的边框排列<br>举例：两个相邻块级盒子垂直外边距合并问题</p>
+<h4 id="REM"><a href="#REM" class="headerlink" title="REM"></a>REM</h4><p>rem是CSS3新增的一个相对单位（root em，根em），是一个相对单位，相对于当前html的font-size的大小来决定的，也就是1个REM = 当前html font-size大小；一般用来做移动端适配问题</p>
+<h4 id="Stylus"><a href="#Stylus" class="headerlink" title="Stylus"></a>Stylus</h4><p>CSS 的预处理框架，在stylus里面可以写一些负责的逻辑，向判断，循环等，使用起来比较的简单方便，但是目前使用人群较少，基数基本上在Less&amp;Sass上面</p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2018/05/29/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86%EF%BC%885-30%EF%BC%89/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
 
 	</main>
 
