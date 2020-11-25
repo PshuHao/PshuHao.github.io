@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>垃圾回收机制、模板引擎 | Hexo</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+      <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/atom.xml" class="header__link">RSS</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">Hexo</a></h1>
+		<h2 class="header__subtitle">shuHalo-blog</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>垃圾回收机制、模板引擎</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2020-03-16</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h4 id="对-Javascript-垃圾回收机制的理解"><a href="#对-Javascript-垃圾回收机制的理解" class="headerlink" title="对 Javascript 垃圾回收机制的理解"></a>对 Javascript 垃圾回收机制的理解</h4><p>(1)、标记清除（mark and sweep） 这是 JavaScript 最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量， 垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开 环境”。 垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被 环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了</p>
+<p> (2)、引用计数(reference counting) 在低版本 IE 中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引 用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该 变量的时候这个值的引用次数就加 1，如果该变量的值变成了另外一个，则这个值得引用次数减 1，当这个值的引用次数变为 0 的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为 0 的值占用的空间。 在 IE 中虽然 JavaScript 对象通过标记清除的方式进行垃圾回收，但 BOM 与 DOM 对象却是通过 引用计数回收垃圾的，也就是说只要涉及 BOM 及 DOM 就会出现循环引用问题</p>
+<h4 id="关于模板引擎"><a href="#关于模板引擎" class="headerlink" title="关于模板引擎"></a>关于模板引擎</h4><p>模板引擎（这里特指用于 Web 开发的模板引擎）是为了使用户界面与业务数据（内容）分离 而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的 HTML 文档。 b、在一些示例中 javascript 有大量的 html 字符串，html 中有一些像 onclick 样的 javascript，这 样 javascript中有 html，html 中有 javascript，代码的偶合度很高，不便于修改与维护，使用模 板引擎可以解决问题</p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2020/03/16/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		  <li class="footer-links__link"><a href="/atom.xml">RSS</a></li>
+	    
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2020 PshuHao | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>

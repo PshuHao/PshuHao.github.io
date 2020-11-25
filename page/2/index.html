@@ -37,6 +37,43 @@
 
 	<article>
 	
+		<h1><a href="/2018/10/03/深度作用选择器/">深度作用选择器</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-10-03</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h1 id="vue-scoped-深度作用选择器"><a href="#vue-scoped-深度作用选择器" class="headerlink" title="vue scoped 深度作用选择器"></a>vue scoped 深度作用选择器</h1><p>如果希望 <code>scoped</code> 样式中的一个选择器能够作用得“更深”，例如影响子组件，可以使用 <code>&gt;&gt;&gt;</code> 操作符：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">.a &gt;&gt;&gt; .b &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>上述代码将会编译成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.a[data-v-f3f3eg9] .b &#123; &#x2F;* ... *&#x2F; &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>有些像 Sass 之类的预处理器无法正确解析 <code>&gt;&gt;&gt;</code>。这种情况下可以使用 <code>/deep/</code> 操作符取而代之——这是一个 <code>/deep/</code> 或 <code>::v-deep</code> 操作符，同样可以正常工作。</p>
+<p><strong>less使用/deep/</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=<span class="string">&quot;less&quot;</span> scoped&gt;</span><br><span class="line"></span><br><span class="line">.searchforminline-out &#123;</span><br><span class="line">/deep/ input&#123;</span><br><span class="line">width: <span class="number">50</span>px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2018/07/12/知识整理（7-12）/">知识整理（7-12）</a></h1>
 	
 	<div class="article__infos">

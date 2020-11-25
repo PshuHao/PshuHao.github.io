@@ -233,6 +233,32 @@
 
 	<article>
 	
+		<h1><a href="/2020/03/16/垃圾回收机制、模板引擎/">垃圾回收机制、模板引擎</a></h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2020-03-16</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h4 id="对-Javascript-垃圾回收机制的理解"><a href="#对-Javascript-垃圾回收机制的理解" class="headerlink" title="对 Javascript 垃圾回收机制的理解"></a>对 Javascript 垃圾回收机制的理解</h4><p>(1)、标记清除（mark and sweep） 这是 JavaScript 最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量， 垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开 环境”。 垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被 环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了</p>
+<p> (2)、引用计数(reference counting) 在低版本 IE 中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引 用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该 变量的时候这个值的引用次数就加 1，如果该变量的值变成了另外一个，则这个值得引用次数减 1，当这个值的引用次数变为 0 的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为 0 的值占用的空间。 在 IE 中虽然 JavaScript 对象通过标记清除的方式进行垃圾回收，但 BOM 与 DOM 对象却是通过 引用计数回收垃圾的，也就是说只要涉及 BOM 及 DOM 就会出现循环引用问题</p>
+<h4 id="关于模板引擎"><a href="#关于模板引擎" class="headerlink" title="关于模板引擎"></a>关于模板引擎</h4><p>模板引擎（这里特指用于 Web 开发的模板引擎）是为了使用户界面与业务数据（内容）分离 而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的 HTML 文档。 b、在一些示例中 javascript 有大量的 html 字符串，html 中有一些像 onclick 样的 javascript，这 样 javascript中有 html，html 中有 javascript，代码的偶合度很高，不便于修改与维护，使用模 板引擎可以解决问题</p>
+
+	
+
+	
+
+</article>
+
+
+
+
+	<article>
+	
 		<h1><a href="/2020/03/07/箭头函数无this指向问题处理/">箭头函数无this指向问题处理</a></h1>
 	
 	<div class="article__infos">
@@ -537,43 +563,6 @@
 <h3 id="3-区别"><a href="#3-区别" class="headerlink" title="3.区别"></a>3.区别</h3><p>axios 和 ajax 的使用方法基本一样，只有<strong>个别参数不同</strong>；</p>
 <p><strong>Axios</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">axios(&#123;</span><br><span class="line">      url: <span class="string">&#x27;http://jsonplaceholder.typicode.com/users&#x27;</span>,</span><br><span class="line">      method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">      responseType: <span class="string">&#x27;json&#x27;</span>, <span class="comment">// 默认的</span></span><br><span class="line">      data: &#123;</span><br><span class="line">        <span class="comment">//&#x27;a&#x27;: 1,</span></span><br><span class="line">        <span class="comment">//&#x27;b&#x27;: 2,</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).then(function (response) &#123;</span><br><span class="line">      console.log(response);</span><br><span class="line">      console.log(response.data);</span><br><span class="line">    &#125;).<span class="keyword">catch</span>(function (error) &#123;</span><br><span class="line">      console.log(error);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">      url: <span class="string">&#x27;http://jsonplaceholder.typicode.com/users&#x27;</span>,</span><br><span class="line">      type: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">      dataType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">        <span class="comment">//&#x27;a&#x27;: 1,</span></span><br><span class="line">        <span class="comment">//&#x27;b&#x27;: 2,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      success: function (response) &#123;</span><br><span class="line">        console.log(response)；</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"> </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-	
-
-	
-
-</article>
-
-
-
-
-	<article>
-	
-		<h1><a href="/2018/10/03/深度作用选择器/">深度作用选择器</a></h1>
-	
-	<div class="article__infos">
-		<span class="article__date">2018-10-03</span><br />
-		
-		
-	</div>
-
-	
-
-	
-		<h1 id="vue-scoped-深度作用选择器"><a href="#vue-scoped-深度作用选择器" class="headerlink" title="vue scoped 深度作用选择器"></a>vue scoped 深度作用选择器</h1><p>如果希望 <code>scoped</code> 样式中的一个选择器能够作用得“更深”，例如影响子组件，可以使用 <code>&gt;&gt;&gt;</code> 操作符：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">.a &gt;&gt;&gt; .b &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>上述代码将会编译成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.a[data-v-f3f3eg9] .b &#123; &#x2F;* ... *&#x2F; &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>有些像 Sass 之类的预处理器无法正确解析 <code>&gt;&gt;&gt;</code>。这种情况下可以使用 <code>/deep/</code> 操作符取而代之——这是一个 <code>/deep/</code> 或 <code>::v-deep</code> 操作符，同样可以正常工作。</p>
-<p><strong>less使用/deep/</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=<span class="string">&quot;less&quot;</span> scoped&gt;</span><br><span class="line"></span><br><span class="line">.searchforminline-out &#123;</span><br><span class="line">/deep/ input&#123;</span><br><span class="line">width: <span class="number">50</span>px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
 
 
 	
