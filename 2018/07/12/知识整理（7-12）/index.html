@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title>知识整理（7-12） | Hexo</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	
+      <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			
+				<a href="/archives" class="header__link">Archive</a>
+			
+				<a href="/tags" class="header__link">Tags</a>
+			
+				<a href="/atom.xml" class="header__link">RSS</a>
+			
+		</nav>
+		<h1 class="header__title"><a href="/">Hexo</a></h1>
+		<h2 class="header__subtitle">shuHalo-blog</h2>
+	</header>
+
+	<main>
+		<article>
+	
+		<h1>知识整理（7-12）</h1>
+	
+	<div class="article__infos">
+		<span class="article__date">2018-07-12</span><br />
+		
+		
+	</div>
+
+	
+
+	
+		<h4 id="1-v-for-key的作用"><a href="#1-v-for-key的作用" class="headerlink" title="1.v-for key的作用"></a>1.v-for key的作用</h4><p>当页面的数据发生变化时，Diff算法只会比较同一层级的节点：</p>
+<p><strong>如果节点类型不同，直接干掉前面的节点，再创建并插入新的节点，不会再比较这个节点以后的子节点了。</strong></p>
+<p><strong>如果节点类型相同，则会重新设置该节点的属性，从而实现节点的更新。</strong></p>
+<p><strong>key的作用主要是为了高效的更新虚拟DOM。</strong>另外vue中在使用<strong>相同标签名元素的过渡切换</strong>时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果。</p>
+<h4 id="2-keep-alive"><a href="#2-keep-alive" class="headerlink" title="2.keep-alive"></a>2.keep-alive</h4><p>Props:</p>
+<ul>
+<li><code>include</code> - 字符串或正则表达式。只有名称匹配的组件会被缓存。</li>
+<li><code>exclude</code> - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。</li>
+<li><code>max</code> - 数字。最多可以缓存多少组件实例。</li>
+</ul>
+<p>用法：<code>&lt;keep-alive&gt;</code> 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。和 <code>&lt;transition&gt;</code> 相似，<code>&lt;keep-alive&gt;</code> 是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在组件的父组件链中。</p>
+<p>当组件在 <code>&lt;keep-alive&gt;</code> 内被切换，它的 <code>activated</code> 和 <code>deactivated</code> 这两个生命周期钩子函数将会被对应执行。</p>
+<p><strong>遍历整个组件树，只要有就缓存</strong></p>
+<h4 id="3-怎么做首屏优化渲染"><a href="#3-怎么做首屏优化渲染" class="headerlink" title="3.怎么做首屏优化渲染"></a>3.怎么做首屏优化渲染</h4><p>一般都是用服务端渲染，中间做一个node中间层，在请求页面时服务器直接把这个页面html在后端拼好，客户端只需要渲染。可以说是老大做的，自己看了一下但是没自己做过。</p>
+<h4 id="4-xss和csrf"><a href="#4-xss和csrf" class="headerlink" title="4.xss和csrf"></a>4.xss和csrf</h4><p>XSS：跨站脚本攻击（Cross Site Script，XSS攻击），通常指黑客通过“HTML注入”篡改了网页，插入了恶意的脚本，从而在用户浏览网页时，控制用户浏览器的一种攻击。</p>
+<p>XSS的本质是一种“HTML注入”，用户的数据被当成了HTML代码一部分来执行，从而产生了新的语义。</p>
+<p>CSRF:CSRF（Cross-site request forgery跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。</p>
+
+	
+
+	
+		<span class="different-posts"><a href="/2018/07/12/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%EF%BC%887-12%EF%BC%89/" onclick="window.history.go(-1); return false;">⬅️ Go back </a></span>
+
+	
+
+</article>
+
+	</main>
+
+	<footer class="footer">
+	<div class="footer-content">
+		
+	      <div class="footer__element">
+	<p>Hi there, <br />welcome to my Blog glad you found it. Have a look around, will you?</p>
+</div>
+
+	    
+	      <div class="footer__element">
+	<h5>Check out</h5>
+	<ul class="footer-links">
+		<li class="footer-links__link"><a href="/archives">Archive</a></li>
+		
+		  <li class="footer-links__link"><a href="/atom.xml">RSS</a></li>
+	    
+		<li class="footer-links__link"><a href="/about">about page</a></li>
+		<li class="footer-links__link"><a href="/tags">Tags</a></li>
+		<li class="footer-links__link"><a href="/categories">Categories</a></li>
+	</ul>
+</div>
+
+	    
+
+		<div class="footer-credit">
+			<span>© 2020 PshuHao | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/HoverBaum/meilidu-hexo">MeiliDu</a></span>
+		</div>
+
+	</div>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
